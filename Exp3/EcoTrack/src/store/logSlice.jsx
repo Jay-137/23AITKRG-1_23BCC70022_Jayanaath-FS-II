@@ -7,7 +7,7 @@ export const fetchLogs=createAsyncThunk(
     const files=await new Promise((resolve)=>{
       setTimeout(()=>{
         resolve(logs);
-      },1000);
+      },1500);
     })
     return files;
   }
