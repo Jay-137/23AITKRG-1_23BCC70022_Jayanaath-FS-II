@@ -1,59 +1,54 @@
-# Eco-Track (Experiment 2)
+## README: Experiment 4 – Performance Optimization & Enterprise UI
 
-Eco-Track Exp2 is an evolved version of the carbon tracking application, now featuring a secure authentication system, protected routes, and an organized dashboard layout with nested navigation.
+### 🌿 Project: EcoTrack v4.0
 
-## New Features
+**Aim:** To optimize application performance through memoization and code splitting while enhancing the user interface with Material UI components.
 
-* **Authentication System**: Implemented using React Context API to manage global login states across the application.
-* **Protected Routing**: A dedicated security layer that restricts access to the dashboard and logs, redirecting unauthenticated users to the Login page.
-* **Nested Dashboard Layout**: A unified dashboard interface containing sub-navigation for specialized views (Summary, Analytics, and Settings).
-* **Programmatic Navigation**: Uses React Router hooks to redirect users dynamically after login or logout actions.
+### ⚡ Optimization Techniques
 
-## Project Structure
-
-* **`src/contexts/`**: Contains `AuthContext.jsx`, which provides the `isLoggedIn` state and `setIsLoggedIn` updater to the entire app.
-* **`src/protectedroutes/`**: Contains logic to gate-keep private content from unauthorized users.
-* **`src/pages/`**:
-* `Login.jsx`: Handles user authentication and navigation to the home route.
-* `DashboardLayout.jsx`: Provides the primary structure and navigation links for the dashboard sub-pages.
-* `DashboardSummary.jsx`, `DashboardAnalytics.jsx`, `DashboardSettings.jsx`: Specific views nested within the main dashboard.
-* `Logs.jsx`: Displays filtered activities with a carbon footprint of 4kg or higher.
+* **Code Splitting:** Route-based lazy loading using `React.lazy()` and `Suspense` to minimize initial bundle size.
+* **Memoization:** * `useMemo`: Preventing expensive filter recalculations on the `logs` data.
+* `useCallback`: Stabilizing function references for event handlers.
+* `React.memo`: Preventing unnecessary re-renders of child components.
 
 
-* **`src/App.jsx`**: Configures the main routing architecture using `BrowserRouter`, including nested and protected route definitions.
+* **Lifecycle Persistence:** Using `location.key` with `Suspense` boundaries to ensure loading indicators trigger correctly across route transitions.
 
-## Tech Stack
+### 🎨 UI Enhancement
 
-* **Frontend**: React 19
-* **Routing**: React Router DOM 7
-* **Build Tool**: Vite 7
+* **Material UI (MUI):** Implementation of a professional design system.
+* **Loading Feedback:** Global and component-level progress indicators using `<CircularProgress />`.
+* **Layout Logic:** Refactoring `DashboardLayout` to maintain a persistent sidebar during code-split transitions.
 
-## Installation and Setup
+### 📂 Folder Structure
 
-1. Navigate to the `Exp2` directory.
-2. Install dependencies:
-```bash
-npm install
+```text
+src/
+├── components/
+│   ├── Header.jsx       # MUI-enhanced header
+│   └── TopLoader.jsx    # Progress bar component
+├── pages/
+│   ├── DashboardLayout.jsx  # Nested routes with Suspense
+│   └── DashboardSummary.jsx # Lazy-loaded chunk
+└── App.jsx              # Route-based code splitting
 
 ```
 
+### 📝 Optimization Logic
 
-3. Start the development server:
-```bash
-npm run dev
+```javascript
+// memoizing high-carbon calculation
+const highCarbon = useMemo(() => {
+  return data.filter(log => log.carbon >= 4);
+}, [data]); 
+
+// Lazy loading example
+const Logs = React.lazy(() => import("./pages/Logs"));
 
 ```
 
+### 📈 Performance Results
 
-
-## Routing Map
-
-* `/login`: Public login page.
-* `/`: Main Dashboard (Protected).
-* `/summary`: Nested dashboard summary view.
-* `/analytics`: Nested dashboard analytics view.
-* `/settings`: Nested dashboard settings view.
-
-
-* `/logs`: High-carbon activity log (Protected).
-* `/logout`: Secure logout functionality (Protected).
+* **Reduced Initial Payload:** Only essential code is loaded on the first visit.
+* **Fluid Navigation:** Immediate visual feedback via Suspense fallbacks.
+* **Stable UI:** Elimination of redundant re-renders for static UI elements.
