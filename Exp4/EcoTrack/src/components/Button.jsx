@@ -3,7 +3,9 @@ import React from "react";
 const Button=React.memo(({clkHandler,textVal})=>{
   console.log("Button Rendered");
   return (
-    <button onClick={clkHandler} style={{padding:"5px"}}>{textVal}</button>
+    <button onClick={clkHandler} style={{padding:"5px",backgroundColor:"#689f38",
+      color:"white",cursor:"pointer"
+    }}>{textVal}</button>
   )
 });
 export default Button;

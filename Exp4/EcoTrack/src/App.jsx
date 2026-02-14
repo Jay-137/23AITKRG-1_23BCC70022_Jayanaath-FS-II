@@ -3,11 +3,13 @@ import Header from "./components/Header";
 import Login from "./pages/Login";
 import ProtectedRoute from "./protectedroutes/ProtectedRoute";
 import DashboardLayout from "./pages/DashboardLayout";
-import DashboardSummary from "./pages/DashboardSummary";
-import DashboardAnalytics from "./pages/DashboardAnalytics";
-import Logs from "./pages/Logs";
-import DashboardSettings from "./pages/DashboardSettings";
+import React,{ Suspense } from "react";
+const DashboardSummary=React.lazy(()=>import("./pages/DashboardSummary"));
+const DashboardAnalytics=React.lazy(()=>import("./pages/DashboardAnalytics"));
+const Logs=React.lazy(()=>import("./pages/Logs"));
+const DashboardSettings =React.lazy(()=>import("./pages/DashboardSettings"));
 import Logout from "./pages/Logout";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const App=()=>{
   return(
@@ -22,11 +24,12 @@ const App=()=>{
             <Route path="analytics" element={<DashboardAnalytics/>}/>
             <Route path="settings" element={<DashboardSettings/>}/>
           </Route>
-          <Route path="/logs" element={<Logs/>}/>
+          <Route path="/logs" element={<Suspense fallback={<CircularProgress />}>
+          <Logs/>
+          </Suspense>}/>
           <Route path="/logout" element={<Logout/>}/>
         </Route>
       </Routes>
-    
     </BrowserRouter>
   )
 }
