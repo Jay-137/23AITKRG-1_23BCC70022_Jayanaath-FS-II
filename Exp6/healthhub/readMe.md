@@ -33,7 +33,7 @@ Creates a new patient record in the database. The ID is auto-generated.
     "contact": "9876543210"
 }
 ```
-**Postman Result:**
+#### Postman Result
 ![POST Create Patient](../Screenshots/POST.png)
 
 ### 2. Get All Patients (GET)
@@ -41,7 +41,7 @@ Retrieves a list of all patients currently stored in the system.
 * **URL:** `GET http://localhost:8080/api/patients`
 * **Body:** None
 
-**Postman Result:**
+#### Postman Result
 ![GET All Patients](../Screenshots/GET.png)
 
 ### 3. Get Patient by ID (GET)
@@ -49,7 +49,7 @@ Retrieves the details of a specific patient using their unique ID.
 * **URL:** `GET http://localhost:8080/api/patients/1`
 * **Body:** None
 
-**Postman Result:**
+#### Postman Result
 ![GET Single Patient](../Screenshots/GETBYID.png)
 
 ### 4. Update a Patient (PUT)
@@ -64,7 +64,7 @@ Updates the details of an existing patient.
     "contact": "9999999999"
 }
 ```
-**Postman Result:**
+#### Postman Result
 ![PUT Update Patient](../Screenshots/UPDATE.png)
 
 ### 5. Delete a Patient (DELETE)
@@ -72,7 +72,7 @@ Removes a patient record from the database.
 * **URL:** `DELETE http://localhost:8080/api/patients/1`
 * **Body:** None
 
-**Postman Result:**
+#### Postman Result
 ![DELETE Patient](../Screenshots/DELETE.png)
 
 ---
